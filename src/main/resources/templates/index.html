@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Homepage</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+<h1>Welcome to CodeFellowship</h1>
+
+<div th:if="${#request.userPrincipal != null}">
+    <p>Welcome, <span th:text="${#request.userPrincipal.name}"></span>!</p>
+    <p th:if="${user.firstName != null}">First Name: <span th:text="${user.firstName}"></span></p>
+    <p th:if="${user.lastName != null}">Last Name: <span th:text="${user.lastName}"></span></p>
+    <p th:if="${user.dateOfBirth != null}">Date of Birth: <span th:text="${user.dateOfBirth}"></span></p>
+    <p th:if="${user.bio != null}">Bio: <span th:text="${user.bio}"></span></p>
+    <a th:href="@{/logout}">Logout</a>
+
+</div>
+
+<div th:unless="${#request.userPrincipal != null}">
+    <a href="/login">Login</a>
+    <a href="/signup">Signup</a>
+</div>
+</body>
+</html>
