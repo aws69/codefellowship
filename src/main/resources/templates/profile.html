@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+</head>
+<body>
+<!-- Navbar -->
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/profile">Profile</a></li>
+    <li><a href="/logout">Logout</a></li>
+  </ul>
+
+  <!-- Search Bar -->
+  <form method="GET" action="/searchUsers">
+    <input type="text" id="search" name="q" placeholder="Search users...">
+    <input type="submit" value="Search">
+  </form>
+</nav>
+
+<h1>User Profile</h1>
+<p>Hello, <span th:text="${user.username}">Username</span>!</p>
+
+<!-- Display the user's profile picture -->
+<img th:src="${user.image}" alt="Profile Picture" style="max-width: 200px; max-height: 200px;">
+
+<!-- Display user information -->
+<h2>User Information:</h2>
+<p><strong>First Name:</strong> <span th:text="${user.firstName}">First Name</span></p>
+<p><strong>Last Name:</strong> <span th:text="${user.lastName}">Last Name</span></p>
+<p><strong>Date of Birth:</strong> <span th:text="${user.dateOfBirth}">Date of Birth</span></p>
+<p><strong>Bio:</strong> <span th:text="${user.bio}">Bio</span></p>
+
+<!-- Button to edit user information -->
+<form method="GET" action="/updateProfile">
+  <input type="submit" value="Edit Profile">
+</form>
+
+<!-- Form to create posts -->
+<h2>Create Post:</h2>
+<form method="POST" action="/createPost">
+  <textarea name="body" rows="4" cols="50" placeholder="Enter your post here..."></textarea>
+  <br>
+  <input type="submit" value="Create Post">
+</form>
+
+<!-- Display posts if available, or a message if there are none -->
+<th:block th:if="${user.posts}">
+  <h2>Posts:</h2>
+  <ul>
+    <th:block th:each="post : ${user.posts}">
+      <li th:text="${post.body}"></li>
+    </th:block>
+  </ul>
+</th:block>
+<th:block th:unless="${user.posts}">
+  <p>No posts available.</p>
+</th:block>
+
+</body>
+</html>

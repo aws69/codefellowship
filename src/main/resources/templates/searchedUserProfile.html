@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+</head>
+<body>
+<!-- Navbar -->
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+
+    <!-- Search Bar -->
+    <form method="GET" action="/searchUsers">
+        <input type="text" id="search" name="q" placeholder="Search users...">
+        <input type="submit" value="Search">
+    </form>
+</nav>
+
+<nav>
+    <!-- ... -->
+</nav>
+
+<h1>Search Results</h1>
+
+<!-- Display Search Results as Cards -->
+<div class="user-cards">
+    <!-- Loop through search results -->
+    <th:block th:each="result : ${searchResults}">
+        <div class="user-card">
+            <!-- Profile Image -->
+            <img th:src="${result.image}" alt="Profile Picture" style="max-width: 100px; max-height: 100px;">
+
+            <!-- Username -->
+            <h2 th:text="${result.username}">Username</h2>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
-
+import org.springframework.ui.Model;
 import java.security.Principal;
 import java.time.LocalDate;
 
@@ -23,13 +23,13 @@ public class PostsController {
     PostsRepo postsRepo;
 
     @GetMapping("/CreatedPost")
-    public String CreatedPost(Principal p,Module m){
+    public String CreatedPost(Principal p, Model m){
         if (p != null) {
             String username = p.getName();
             ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
-            m.addAttribute("user", ApplicationUser);
+            m.addAttribute("user", applicationUser);
         }
-        return "profilePage";
+        return "profile";
     }
 
     @PostMapping("/createPost")
@@ -44,6 +44,6 @@ public class PostsController {
             posts.setCreatedAt(LocalDate.now());
             postsRepo.save(posts);
         }
-        return new RedirectView("/profilePage");
+        return new RedirectView("/profile");
     }
 }

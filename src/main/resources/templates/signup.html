@@ -1,43 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" lang="">
+<html lang="en">
 <head>
-    <title>Registration</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
 </head>
 <body>
-<h2>Registration</h2>
-<form th:action="@{/signup}" method="post">
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-    </div>
-    <div>
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" required />
-    </div>
-    <div>
-        <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" required />
-    </div>
-    <div>
-        <label for="dateOfBirth">Date of Birth:</label>
-        <input type="date" id="dateOfBirth" name="dateOfBirth" required />
-    </div>
-    <div>
-        <label for="bio">Bio:</label>
-        <textarea id="bio" name="bio"></textarea>
-    </div>
-    <div>
-        <button type="submit">Register</button>
-    </div>
+<!-- Navbar -->
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login</a></li>
+    </ul>
+</nav>
+
+<h1>Sign Up</h1>
+
+<!-- Signup Form -->
+<form method="POST" action="/signup">
+    <!-- Username -->
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br>
+
+    <!-- Password -->
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <!-- First Name -->
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required><br>
+
+    <!-- Last Name -->
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required><br>
+
+    <!-- Date of Birth -->
+    <label for="dateOfBirth">Date of Birth:</label>
+    <input type="date" id="dateOfBirth" name="dateOfBirth" required><br>
+
+    <!-- Bio -->
+    <label for="bio">Bio:</label>
+    <textarea id="bio" name="bio" rows="4" cols="50"></textarea><br>
+
+    <!-- Profile Image URL -->
+    <label for="image">Profile Image URL:</label>
+    <input type="text" id="image" name="image"><br>
+
+    <input type="submit" value="Sign Up">
 </form>
-<div>
-    <a href="/login">Login</a>
-    <a href="/">Home</a>
-</div>
+
 </body>
 </html>
