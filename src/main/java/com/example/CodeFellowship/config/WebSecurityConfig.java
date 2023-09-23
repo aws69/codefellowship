@@ -3,48 +3,58 @@ package com.example.CodeFellowship.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    public static final String AUTH_PATH = "/api/v1/auth/**";
 
     @Autowired
-    private SiteUserDetailsServiceImpl siteUserDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder(){
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;
     }
 
-    @Bean
-    protected SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Override
+    protected void configure(final HttpSecurity http) throws Exception {
         http
                 .cors().disable()
                 .csrf().disable()
-                .authorizeHttpRequests((auth) -> auth
-                        .antMatchers("/").permitAll()
-                        .antMatchers("/signup").permitAll()
-                        .antMatchers("/css/**").permitAll()
-                        .anyRequest().authenticated()
-                )
+                .authorizeRequests()
+                .antMatchers("/", "/userInfo", "/login", "/signup").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/")
+                .loginPage("/login")
+                .permitAll()
+                .loginProcessingUrl("/perform_login")
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/login?error=true") // Update the failure URL
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login")
-                .and()
-                .getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(siteUserDetailsService)
-                .passwordEncoder(passwordEncoder());
+                .logoutUrl("/perform_logout")
+                .deleteCookies("JSESSIONID");
+    }
 
-        return http.build();
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }
