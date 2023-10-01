@@ -39,7 +39,7 @@ public class UserController {
             ApplicationUser applicationUser = userRepository.findByUsername(username);
             model.addAttribute("username", username);
         }
-        return "index";
+        return "index.html";
     }
 
     @GetMapping("/signup")
@@ -135,7 +135,7 @@ public class UserController {
 
         model.addAttribute("searchResults", searchResults);
 
-        return "searchedUserProfile"; // Display the search results in the searchedUserProfile page
+        return "searchedUserProfile";
     }
 
 }

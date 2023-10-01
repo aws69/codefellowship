@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 <!-- Navbar -->
@@ -32,21 +32,21 @@
 
 <!-- Display the user's profile picture if authenticated -->
 <th:block th:if="${username}">
-    <img th:src="${user.image}" alt="Profile Picture">
+    <img th:src="${user.image}" alt="Profile Picture" src="">
 </th:block>
 
 <!-- Display posts if available, or a message if they are null -->
-<th:block th:if="${user.posts}">
-    <h2>Posts:</h2>
-    <ul>
-        <th:block th:each="post : ${user.posts}">
-            <li th:text="${post.body}"></li>
-        </th:block>
-    </ul>
-</th:block>
-<th:block th:unless="${user.posts}">
-    <p>No posts available.</p>
-</th:block>
+<!--<th:block th:if="${user.posts}">-->
+<!--    <h2>Posts:</h2>-->
+<!--    <ul>-->
+<!--        <th:block th:each="post : ${user.posts}">-->
+<!--            <li th:text="${post.body}"></li>-->
+<!--        </th:block>-->
+<!--    </ul>-->
+<!--</th:block>-->
+<!--<th:block th:unless="${user.posts}">-->
+<!--    <p>No posts available.</p>-->
+<!--</th:block>-->
 
 </body>
 </html>

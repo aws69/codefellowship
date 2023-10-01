@@ -1,25 +1,52 @@
 <!DOCTYPE html>
-<html lang="" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Homepage</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+<!-- Navbar -->
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <!-- Check if the user is authenticated -->
+        <th:block th:if="${username}">
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </th:block>
+        <th:block th:unless="${username}">
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+        </th:block>
+    </ul>
+
+    <!-- Search Bar -->
+    <form method="GET" action="/searchUsers">
+        <input type="text" id="search" name="q" placeholder="Search users...">
+        <input type="submit" value="Search">
+    </form>
+</nav>
+
 <h1>Welcome to CodeFellowship</h1>
 
-<div th:if="${#request.userPrincipal != null}">
-    <p>Welcome, <span th:text="${#request.userPrincipal.name}"></span>!</p>
-    <p th:if="${user.firstName != null}">First Name: <span th:text="${user.firstName}"></span></p>
-    <p th:if="${user.lastName != null}">Last Name: <span th:text="${user.lastName}"></span></p>
-    <p th:if="${user.dateOfBirth != null}">Date of Birth: <span th:text="${user.dateOfBirth}"></span></p>
-    <p th:if="${user.bio != null}">Bio: <span th:text="${user.bio}"></span></p>
-    <a th:href="@{/logout}">Logout</a>
+<!-- Display the user's profile picture if authenticated -->
+<th:block th:if="${username}">
+    <img th:src="${user.image}" alt="Profile Picture" src="">
+</th:block>
 
-</div>
+<!-- Display posts if available, or a message if they are null -->
+<!--<th:block th:if="${user.posts}">-->
+<!--    <h2>Posts:</h2>-->
+<!--    <ul>-->
+<!--        <th:block th:each="post : ${user.posts}">-->
+<!--            <li th:text="${post.body}"></li>-->
+<!--        </th:block>-->
+<!--    </ul>-->
+<!--</th:block>-->
+<!--<th:block th:unless="${user.posts}">-->
+<!--    <p>No posts available.</p>-->
+<!--</th:block>-->
 
-<div th:unless="${#request.userPrincipal != null}">
-    <a href="/login">Login</a>
-    <a href="/signup">Signup</a>
-</div>
 </body>
 </html>
