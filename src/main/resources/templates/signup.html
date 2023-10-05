@@ -1,53 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
 <head>
-    <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
-<!-- Navbar -->
-<nav>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/login">Login</a></li>
-    </ul>
-</nav>
+<div class="container">
+    <h2 class="heading">Create a New Account</h2>
+    <form class="form" action="/signup" method="POST">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter username" required class="input-field">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter password" required class="input-field">
+        </div>
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required class="input-field">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required class="input-field">
+        </div>
+        <div class="form-group">
+            <label for="dateOfBirth">Date of Birth</label>
+            <input type="date" id="dateOfBirth" name="dateOfBirth" required class="input-field">
+        </div>
+        <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea id="bio" name="bio" placeholder="Enter bio" class="input-field"></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn-primary">Sign Up</button>
+        </div>
+    </form>
 
-<h1>Sign Up</h1>
-
-<!-- Signup Form -->
-<form method="POST" action="/signup">
-    <!-- Username -->
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br>
-
-    <!-- Password -->
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br>
-
-    <!-- First Name -->
-    <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" name="firstName" required><br>
-
-    <!-- Last Name -->
-    <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" name="lastName" required><br>
-
-    <!-- Date of Birth -->
-    <label for="dateOfBirth">Date of Birth:</label>
-    <input type="date" id="dateOfBirth" name="dateOfBirth" required><br>
-
-    <!-- Bio -->
-    <label for="bio">Bio:</label>
-    <textarea id="bio" name="bio" rows="4" cols="50"></textarea><br>
-
-    <!-- Profile Image URL -->
-    <label for="image">Profile Image URL:</label>
-    <input type="text" id="image" name="image"><br>
-
-    <input type="submit" value="Sign Up">
-</form>
-
+    <h2 class="heading">Already have an account?</h2>
+    <a href="/login" class="btn">Login</a>
+</div>
 </body>
 </html>

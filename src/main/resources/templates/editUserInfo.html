@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit User Info</title>
+    <style>
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        h1 {
+          font-size: 24px;
+        }
+        label {
+          font-weight: bold;
+        }
+        input, textarea {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        input[type=submit] {
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        input[type=submit]:hover {
+          background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Edit User Info</h1>
+<form action="/users/{id}" method="post">
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username" th:value="${user.username}"><br>
+    <label for="date_of_birth">Date of Birth:</label><br>
+    <input type="date" id="date_of_birth" name="date_of_birth" th:value="${user.date_of_birth}"><br>
+    <label for="first_name">First Name:</label><br>
+    <input type="text" id="first_name" name="first_name" th:value="${user.first_name}"><br>
+    <label for="last_name">Last Name:</label><br>
+    <input type="text" id="last_name" name="last_name" th:value="${user.last_name}
