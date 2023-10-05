@@ -18,20 +18,11 @@
     </nav>
 </header>
 <main>
-    <div class="profile-info">
-        <h2 th:text="${username}'s Profile"></h2>
-        <p th:text="${bio}"></p>
-        <p><strong>Joined on:</strong> <span th:text="${createdDate}"></span></p>
-    </div>
-    <div class="user-posts">
-        <h3>Your Posts:</h3>
-        <div class="post-container" th:each="post : ${userPosts}">
-            <div class="post">
-                <p th:text="${post.body}"></p>
-                <small>Posted on <span th:text="${#dates.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span></small>
-            </div>
-        </div>
-    </div>
+    <h2>Create a New Post</h2>
+    <form action="/createPost" method="post">
+        <textarea name="body" placeholder="Write your post here..."></textarea>
+        <button type="submit">Post</button>
+    </form>
 </main>
 
 

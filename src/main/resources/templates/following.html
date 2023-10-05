@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}" class="active">Home</a></li>
+            <li><a th:href="@{/profile}">Profile</a></li>
+            <li><a th:href="@{/createPost}">Create Post</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+<body>
+<div class="container">
+
+    <h1>User Information</h1>
+    <h3 th:if="${username != null}" th:text="${'Current user: ' + username +' with created date ' + createdDate}"></h3>
+
+    <form th:action="@{'/follow/' + codeFellowUserId}" method="POST" th:unless="${isFollowing}">
+        <button type="submit">Follow</button>
+    </form>
+
+    <form th:action="@{'/unfollow/' + codeFellowUserId}" method="POST" th:if="${isFollowing}">
+        <button type="submit">Unfollow</button>
+    </form>
+
+    <p>User Name: <span th:text="${codeFellowUsername}"></span></p>
+    <p>First Name: <span th:text="${codeFellowFirstName}"></span></p>
+    <p>Last Name: <span th:text="${codeFellowLastName}"></span></p>
+    <p>Date of Birth: <span th:text="${codeFellowDateOfBirth}"></span></p>
+    <p>Bio: <span th:text="${codeFellowBio}"></span></p>
+</div>
+</body>
+</html>

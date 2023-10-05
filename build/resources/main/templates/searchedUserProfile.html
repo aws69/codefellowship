@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Search Results</title>
@@ -21,10 +21,6 @@
     </form>
 </nav>
 
-<nav>
-    <!-- ... -->
-</nav>
-
 <h1>Search Results</h1>
 
 <!-- Display Search Results as Cards -->
@@ -33,7 +29,7 @@
     <th:block th:each="result : ${searchResults}">
         <div class="user-card">
             <!-- Profile Image -->
-            <img th:src="${result.image}" alt="Profile Picture" style="max-width: 100px; max-height: 100px;">
+            <img th:src="${result.image}" alt="Profile Picture" style="max-width: 100px; max-height: 100px;" src="">
 
             <!-- Username -->
             <h2 th:text="${result.username}">Username</h2>

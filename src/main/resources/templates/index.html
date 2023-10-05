@@ -1,52 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+    <title>Title</title>
 </head>
+<header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}" class="active">Home</a></li>
+            <li><a th:href="@{/login}">Log In</a></li>
+            <li><a th:href="@{/signup}">Sign Up</a></li>
+        </ul>
+    </nav>
+</header>
+
 <body>
-<!-- Navbar -->
-<nav>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <!-- Check if the user is authenticated -->
-        <th:block th:if="${username}">
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </th:block>
-        <th:block th:unless="${username}">
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Sign Up</a></li>
-        </th:block>
-    </ul>
-
-    <!-- Search Bar -->
-    <form method="GET" action="/searchUsers">
-        <input type="text" id="search" name="q" placeholder="Search users...">
-        <input type="submit" value="Search">
-    </form>
-</nav>
-
-<h1>Welcome to CodeFellowship</h1>
-
-<!-- Display the user's profile picture if authenticated -->
-<th:block th:if="${username}">
-    <img th:src="${user.image}" alt="Profile Picture">
-</th:block>
-
-<!-- Display posts if available, or a message if they are null -->
-<th:block th:if="${user.posts}">
-    <h2>Posts:</h2>
-    <ul>
-        <th:block th:each="post : ${user.posts}">
-            <li th:text="${post.body}"></li>
-        </th:block>
-    </ul>
-</th:block>
-<th:block th:unless="${user.posts}">
-    <p>No posts available.</p>
-</th:block>
-
+<h2>Welcome to our Code Fellow Ship website.</h2>
+<div class="button-container">
+    <a th:href="@{/login}" class="login-button">Log In</a>
+    <a th:href="@{/signup}" class="signup-button">Sign Up</a>
+</div>
 </body>
 </html>
